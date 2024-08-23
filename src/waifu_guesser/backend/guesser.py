@@ -43,4 +43,5 @@ async def handle_new_image(event: Event):
 async def ev_poller():
     headers = {"username": USERNAME, "password": PASSWORD}
     async with EventPolling(ev) as poller:
+        print("Poller started!")
         await poller.start(0.5, server_endpoint=SERVER_ENDPOINT, custom_headers=headers) # type: ignore

@@ -22,7 +22,6 @@ async def index():
 @app.route(CONTEXT_PATH + "/upload", methods=["POST"])
 async def evaluate():
     files = request.files.getlist("file")
-    print(files)
     if len(files) > 1:
         return {
             "message": "expected only one image"
@@ -50,14 +49,13 @@ async def evaluate():
 async def get_result():
     _id = request.args.get("id")
     if not _id: return {"message":"Invalid Event ID! Please try again!"}, 400
-    event = EVENTS.get(_id)
+    event = EVENTS.pop(_id, None)
     if event is None: return {"message":"Invalid Event ID! Please try again!"}, 400
     if event.answered:
         answer = event.answer
         if answer['ok']: # type: ignore
             if answer['content-type'] == "application/json": # type: ignore
                 return answer
-            EVENTS.pop(event.identifier)
             return render_template("evaluate.html", base64data=answer['image'], tags=answer['tags']) # type: ignore
         return {"message": answer['message']}, 500 # type: ignore
     return {"message": "Waiting for server, please, reload the page..."}, 200

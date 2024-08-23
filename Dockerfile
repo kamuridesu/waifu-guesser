@@ -1,4 +1,4 @@
-FROM ghcr.io/astral-sh/uv as uv
+FROM ghcr.io/astral-sh/uv AS uv
 
 FROM python:3.10-slim
 WORKDIR /app
@@ -8,3 +8,4 @@ RUN --mount=from=uv,source=/uv,target=/bin/uv \
 COPY . .
 RUN --mount=from=uv,source=/uv,target=/bin/uv \
     uv pip install --system -e .
+ENTRYPOINT [ "python", "main.py" ]
