@@ -56,6 +56,6 @@ async def get_result():
         if answer['ok']: # type: ignore
             if answer['content-type'] == "application/json": # type: ignore
                 return answer
-            return render_template("evaluate.html", base64data=answer['image'], tags=answer['tags']) # type: ignore
+            return render_template("evaluate.html", base64data=answer['image'], tags=answer['tags'], CONTEXT_PATH=CONTEXT_PATH) # type: ignore
         return {"message": answer['message']}, 500 # type: ignore
     return {"message": "Waiting for server, please, reload the page..."}, 200
