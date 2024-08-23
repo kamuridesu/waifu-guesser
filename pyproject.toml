@@ -1,0 +1,15 @@
+[project]
+name = "waifu-guesser"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "shimarin[flask]>=0.2.3",
+    "hypercorn>=0.17.3",
+    "uvloop>=0.20.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,12 @@
+services:
+  autotagger:
+    image: ghcr.io/danbooru/autotagger
+    container_name: autotagger
+    ports:
+      - 5000:5000
+  backend:
+    build: .
+    container_name: backend_guesser
+    env_file: .env
+    command: back
+  
