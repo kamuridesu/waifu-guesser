@@ -49,9 +49,10 @@ async def evaluate():
 async def get_result():
     _id = request.args.get("id")
     if not _id: return {"message":"Invalid Event ID! Please try again!"}, 400
-    event = EVENTS.pop(_id, None)
+    event = EVENTS.get(_id)
     if event is None: return {"message":"Invalid Event ID! Please try again!"}, 400
     if event.answered:
+        EVENTS.pop(_id)
         answer = event.answer
         if answer['ok']: # type: ignore
             if answer['content-type'] == "application/json": # type: ignore

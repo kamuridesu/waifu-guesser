@@ -25,9 +25,8 @@ async def get_tags(payload: dict[str, str]):
                 if isinstance(d, dict) and d.get("error") != None:
                     print(d["message"])
                     return tags
-                for name, rating in d[0]["tags"].items():
-                    if rating > 0.5:
-                        tags.append(name)
+                for name, _ in d[0]["tags"].items():
+                    tags.append(name)
             return tags
 
 
